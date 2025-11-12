@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  build-and-test:
+    name: Lint, Test and Build (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 20]
+
+    defaults:
+      run:
+        working-directory: simple-portfolio-223536-223574/PortfolioWebApp
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: "npm"
+          cache-dependency-path: simple-portfolio-223536-223574/PortfolioWebApp/package.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npx eslint .
+
+      - name: Run tests
+        env:
+          CI: true
+        run: |
+          npm test -- --watchAll=false
+
+      - name: Build
+        env:
+          CI: true
+        run: npm run build

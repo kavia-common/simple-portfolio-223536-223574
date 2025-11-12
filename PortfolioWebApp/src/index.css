@@ -10,6 +10,20 @@ body {
   border-radius: 6px;
 }
 
+/* Make skip link visible when focused */
+.visually-hidden:focus,
+a.visually-hidden:focus {
+  position: static !important;
+  height: auto; width: auto;
+  clip: auto;
+  padding: 8px 12px;
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  border-radius: 8px;
+  display: inline-block;
+  z-index: 9999;
+}
+
 [id] {
   scroll-margin-top: 72px; /* offset for sticky navbar */
 }

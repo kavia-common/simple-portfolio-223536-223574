@@ -24,15 +24,16 @@ function Skills() {
           {skills.map((skill) => (
             <div key={skill.name} role="listitem" className="card" style={{padding:16}}>
               <div style={{display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom:8}}>
-                <strong>{skill.name}</strong>
-                <span aria-hidden="true" style={{color:'var(--color-text-muted)'}}>{skill.level}%</span>
+                <strong id={`skill-${skill.name}-label`}>{skill.name}</strong>
+                <span id={`skill-${skill.name}-value`} style={{color:'var(--color-text-muted)'}}>{skill.level}%</span>
               </div>
               <div
                 role="progressbar"
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-valuenow={skill.level}
-                aria-label={`${skill.name} proficiency`}
+                aria-labelledby={`skill-${skill.name}-label`}
+                aria-describedby={`skill-${skill.name}-value`}
                 style={{
                   width:'100%',
                   height:10,

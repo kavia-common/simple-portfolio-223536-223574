@@ -50,12 +50,22 @@ function Navbar() {
       <div className="container" style={{display:'flex', alignItems:'center', justifyContent:'space-between', gap:16, padding:12}}>
         <a href="#home" onClick={handleNavClick('home')} className="brand" style={{fontWeight:700}}>
           {/* Use FRONTEND URL for title context if present */}
-          {process.env.REACT_APP_FRONTEND_URL ? new URL(process.env.REACT_APP_FRONTEND_URL).hostname : 'My Portfolio'}
+          {(() => {
+            try {
+              return process.env.REACT_APP_FRONTEND_URL
+                ? new URL(process.env.REACT_APP_FRONTEND_URL).hostname
+                : 'My Portfolio';
+            } catch {
+              return 'My Portfolio';
+            }
+          })()}
         </a>
 
         <button
+          id="menu-button"
           aria-label="Toggle navigation menu"
           aria-expanded={open}
+          aria-controls="primary-menu"
           className="btn secondary"
           onClick={() => setOpen(v => !v)}
           style={{ display:'inline-flex'}}
@@ -64,11 +74,11 @@ function Navbar() {
         </button>
 
         <ul
+          id="primary-menu"
           role="menubar"
-          className="nav-links"
+          className={`nav-links ${open ? 'open' : ''}`}
           style={{
             listStyle:'none',
-            display: open ? 'flex':'flex',
             gap:12,
             margin:0,
             padding:0,
@@ -99,7 +109,7 @@ function Navbar() {
               </a>
             </li>
           ))}
-          <li><ThemeToggle /></li>
+          <li role="none"><ThemeToggle /></li>
         </ul>
       </div>
       <style>{`
@@ -109,8 +119,10 @@ function Navbar() {
           border-bottom: 1px solid var(--color-border);
           backdrop-filter: saturate(180%) blur(6px);
         }
+        .nav-links { display: flex; }
         @media (max-width: 720px) {
-          .nav-links { display: ${open ? 'flex':'none'}; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: var(--color-bg); padding: 12px; border-bottom: 1px solid var(--color-border); }
+          .nav-links { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: var(--color-bg); padding: 12px; border-bottom: 1px solid var(--color-border); }
+          .nav-links.open { display: flex; }
         }
       `}</style>
     </nav>

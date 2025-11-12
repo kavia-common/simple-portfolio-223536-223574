@@ -37,9 +37,10 @@ function App() {
 
   return (
     <div className="App">
-      <a href="#home" className="visually-hidden">Skip to content</a>
+      {/* Skip link for keyboard users */}
+      <a href="#main" className="visually-hidden">Skip to main content</a>
       <Navbar />
-      <main id="main" tabIndex={-1}>
+      <main id="main" tabIndex={-1} role="main" aria-label="Main content">
         <Hero />
         <Skills />
         <Projects />

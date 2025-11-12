@@ -27,8 +27,10 @@ function Projects() {
               }}>
                 <img
                   src={p.image}
-                  alt={p.title}
+                  alt={`${p.title} – project preview image`}
                   loading="lazy"
+                  width="1280"
+                  height="720"
                   style={{ width:'100%', height:'100%', objectFit:'cover', filter:'saturate(1.05) contrast(1.02)' }}
                 />
                 {/* simple placeholder shimmer effect via CSS gradient behind image load */}

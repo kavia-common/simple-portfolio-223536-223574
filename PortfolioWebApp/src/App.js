@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import './styles/variables.css';
+import './styles/performance.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Skills from './components/Skills';

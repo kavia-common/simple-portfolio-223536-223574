@@ -15,17 +15,13 @@ function Skills() {
         <div
           role="list"
           aria-label="Skill list"
-          style={{
-            display:'grid',
-            gridTemplateColumns:'repeat(auto-fill, minmax(240px, 1fr))',
-            gap:16
-          }}
+          className="skills-grid"
         >
           {skills.map((skill) => (
-            <div key={skill.name} role="listitem" className="card" style={{padding:16}}>
-              <div style={{display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom:8}}>
+            <div key={skill.name} role="listitem" className="card card-padding-sm">
+              <div className="row-between">
                 <strong id={`skill-${skill.name}-label`}>{skill.name}</strong>
-                <span id={`skill-${skill.name}-value`} style={{color:'var(--color-text-muted)'}}>{skill.level}%</span>
+                <span id={`skill-${skill.name}-value`} className="muted">{skill.level}%</span>
               </div>
               <div
                 role="progressbar"
@@ -34,31 +30,17 @@ function Skills() {
                 aria-valuenow={skill.level}
                 aria-labelledby={`skill-${skill.name}-label`}
                 aria-describedby={`skill-${skill.name}-value`}
-                style={{
-                  width:'100%',
-                  height:10,
-                  background:'var(--color-border)',
-                  borderRadius:999,
-                  overflow:'hidden'
-                }}
+                className="progress-track"
               >
-                <span style={{
-                  display:'block',
-                  height:'100%',
-                  width:`${skill.level}%`,
-                  background:'linear-gradient(90deg, var(--color-primary), var(--color-accent))'
-                }} />
+                <span
+                  className="progress-fill"
+                  style={{ width: `${skill.level}%` }}
+                />
               </div>
               {skill.tags?.length ? (
-                <div style={{display:'flex', flexWrap:'wrap', gap:8, marginTop:10}}>
+                <div className="row-flex-gap" style={{ marginTop: 10 }}>
                   {skill.tags.map(tag => (
-                    <span key={tag} className="tag" style={{
-                      border:'1px solid var(--color-border)',
-                      padding:'4px 8px',
-                      borderRadius:999,
-                      color:'var(--color-text-muted)',
-                      fontSize:12
-                    }}>{tag}</span>
+                    <span key={tag} className="tag chip muted">{tag}</span>
                   ))}
                 </div>
               ): null}

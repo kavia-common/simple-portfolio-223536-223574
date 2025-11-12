@@ -33,16 +33,16 @@ function Contact() {
 
   return (
     <section id="contact" tabIndex={-1} className="section" aria-label="Contact">
-      <div className="container" style={{maxWidth:720}}>
+      <div className="container maxw-720">
         <h2 className="section-title">Contact</h2>
         <p className="section-subtitle">Have a question or want to work together?</p>
 
-        <form onSubmit={onSubmit} noValidate aria-describedby="contactHelp" className="card" style={{padding:16}}>
+        <form onSubmit={onSubmit} noValidate aria-describedby="contactHelp" className="card card-padding">
           <p id="contactHelp" className="visually-hidden">All fields are required. This form does not submit data.</p>
 
-          <div style={{display:'grid', gap:12}}>
+          <div className="form-grid">
             <label>
-              <span style={{display:'inline-block', marginBottom:6}}>Name</span>
+              <span className="inline-label">Name</span>
               <input
                 type="text"
                 name="name"
@@ -50,17 +50,13 @@ function Contact() {
                 onChange={(e)=> setForm(f => ({...f, name: e.target.value}))}
                 aria-invalid={!!errors.name}
                 aria-describedby={errors.name ? 'name-error' : undefined}
-                style={{
-                  width:'100%', padding:'10px 12px', borderRadius:10,
-                  border:`1px solid ${errors.name ? 'crimson':'var(--color-border)'}`,
-                  background:'var(--color-bg)', color:'var(--color-text)'
-                }}
+                className={`input-base ${errors.name ? 'input-error' : ''}`}
               />
-              {errors.name && <span id="name-error" role="alert" style={{color:'crimson', fontSize:12}}>{errors.name}</span>}
+              {errors.name && <span id="name-error" role="alert" className="error-text">{errors.name}</span>}
             </label>
 
             <label>
-              <span style={{display:'inline-block', marginBottom:6}}>Email</span>
+              <span className="inline-label">Email</span>
               <input
                 type="email"
                 name="email"
@@ -68,17 +64,13 @@ function Contact() {
                 onChange={(e)=> setForm(f => ({...f, email: e.target.value}))}
                 aria-invalid={!!errors.email}
                 aria-describedby={errors.email ? 'email-error' : undefined}
-                style={{
-                  width:'100%', padding:'10px 12px', borderRadius:10,
-                  border:`1px solid ${errors.email ? 'crimson':'var(--color-border)'}`,
-                  background:'var(--color-bg)', color:'var(--color-text)'
-                }}
+                className={`input-base ${errors.email ? 'input-error' : ''}`}
               />
-              {errors.email && <span id="email-error" role="alert" style={{color:'crimson', fontSize:12}}>{errors.email}</span>}
+              {errors.email && <span id="email-error" role="alert" className="error-text">{errors.email}</span>}
             </label>
 
             <label>
-              <span style={{display:'inline-block', marginBottom:6}}>Message</span>
+              <span className="inline-label">Message</span>
               <textarea
                 name="message"
                 rows="5"
@@ -86,13 +78,9 @@ function Contact() {
                 onChange={(e)=> setForm(f => ({...f, message: e.target.value}))}
                 aria-invalid={!!errors.message}
                 aria-describedby={errors.message ? 'message-error' : undefined}
-                style={{
-                  width:'100%', padding:'10px 12px', borderRadius:10,
-                  border:`1px solid ${errors.message ? 'crimson':'var(--color-border)'}`,
-                  background:'var(--color-bg)', color:'var(--color-text)', resize:'vertical'
-                }}
+                className={`input-base textarea-resize ${errors.message ? 'input-error' : ''}`}
               />
-              {errors.message && <span id="message-error" role="alert" style={{color:'crimson', fontSize:12}}>{errors.message}</span>}
+              {errors.message && <span id="message-error" role="alert" className="error-text">{errors.message}</span>}
             </label>
 
             <div>

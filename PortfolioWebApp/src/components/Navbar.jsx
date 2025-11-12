@@ -47,8 +47,8 @@ function Navbar() {
 
   return (
     <nav className="navbar" aria-label="Primary">
-      <div className="container" style={{display:'flex', alignItems:'center', justifyContent:'space-between', gap:16, padding:12}}>
-        <a href="#home" onClick={handleNavClick('home')} className="brand" style={{fontWeight:700}}>
+      <div className="container">
+        <a href="#home" onClick={handleNavClick('home')} className="brand">
           {/* Use FRONTEND URL for title context if present */}
           {(() => {
             try {
@@ -66,9 +66,8 @@ function Navbar() {
           aria-label="Toggle navigation menu"
           aria-expanded={open}
           aria-controls="primary-menu"
-          className="btn secondary"
+          className="btn secondary menu-button-inline"
           onClick={() => setOpen(v => !v)}
-          style={{ display:'inline-flex'}}
         >
           ☰
         </button>
@@ -77,13 +76,6 @@ function Navbar() {
           id="primary-menu"
           role="menubar"
           className={`nav-links ${open ? 'open' : ''}`}
-          style={{
-            listStyle:'none',
-            gap:12,
-            margin:0,
-            padding:0,
-            alignItems:'center'
-          }}
         >
           {[
             { id:'home', label:'Home' },
@@ -96,14 +88,8 @@ function Navbar() {
                 role="menuitem"
                 href={`#${item.id}`}
                 onClick={handleNavClick(item.id)}
-                className="nav-link"
+                className={`nav-link ${active === item.id ? 'is-active' : ''}`}
                 aria-current={active === item.id ? 'page' : undefined}
-                style={{
-                  padding:'8px 10px',
-                  borderRadius:8,
-                  border: active === item.id ? '1px solid var(--color-primary)' : '1px solid transparent',
-                  color: active === item.id ? 'var(--color-primary)' : 'inherit'
-                }}
               >
                 {item.label}
               </a>
@@ -112,19 +98,6 @@ function Navbar() {
           <li role="none"><ThemeToggle /></li>
         </ul>
       </div>
-      <style>{`
-        .navbar {
-          position: sticky; top: 0; z-index: 40;
-          background: var(--color-bg);
-          border-bottom: 1px solid var(--color-border);
-          backdrop-filter: saturate(180%) blur(6px);
-        }
-        .nav-links { display: flex; }
-        @media (max-width: 720px) {
-          .nav-links { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: var(--color-bg); padding: 12px; border-bottom: 1px solid var(--color-border); }
-          .nav-links.open { display: flex; }
-        }
-      `}</style>
     </nav>
   );
 }

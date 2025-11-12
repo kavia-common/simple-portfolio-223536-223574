@@ -31,11 +31,20 @@ Open http://localhost:3000 after starting.
 
 ## Environment
 
-No new environment variables are required. If present, the following are optionally used at runtime for SEO:
+No new environment variables are required. If present, the following are optionally used at runtime:
+
+SEO
 - REACT_APP_FRONTEND_URL (recommended) — Base site URL used to compute the canonical URL and JSON-LD schema
 - REACT_APP_API_BASE (fallback) — Used only if REACT_APP_FRONTEND_URL is absent
 
-Never include secrets in the client.
+Analytics (optional; GA4)
+- REACT_APP_ANALYTICS_ID — GA4 Measurement ID (e.g., G-XXXXXXX). Analytics only initializes when REACT_APP_NODE_ENV === 'production'.
+- REACT_APP_NODE_ENV — Should be 'production' to enable analytics initialization.
+
+Contact Endpoint (optional)
+- REACT_APP_CONTACT_ENDPOINT — If set, the Contact form will POST JSON payloads to this endpoint using fetch with debounce and accessible status updates. When absent, the form remains client-only and performs no network calls.
+
+Never include secrets in the client. These variables are non-secret feature toggles only.
 
 ## Accessibility
 

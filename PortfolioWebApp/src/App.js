@@ -9,6 +9,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { setSeoDefaults } from './utils/seo';
+import { initAnalytics, trackPageview } from './utils/analytics';
 
 /**
  * PUBLIC_INTERFACE
@@ -26,6 +27,14 @@ function App() {
     }
     // Apply canonical and JSON-LD schema at runtime
     setSeoDefaults();
+
+    // Initialize analytics only when allowed by env flags
+    try {
+      initAnalytics();
+      trackPageview(window.location.pathname + window.location.search);
+    } catch {
+      // ignore analytics errors
+    }
   }, []);
 
   return (

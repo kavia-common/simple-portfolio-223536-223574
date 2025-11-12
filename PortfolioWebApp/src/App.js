@@ -1,47 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import './styles/variables.css';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Skills from './components/Skills';
+import Projects from './components/Projects';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
-// PUBLIC_INTERFACE
+/**
+ * PUBLIC_INTERFACE
+ * App composes the portfolio sections into a SPA and sets basic SEO title.
+ */
 function App() {
-  const [theme, setTheme] = useState('light');
-
-  // Effect to apply theme to document element
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
+    const site = process.env.REACT_APP_FRONTEND_URL || process.env.REACT_APP_API_BASE || '';
+    document.title = `Alex Doe • Portfolio`;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      const m = document.createElement('meta');
+      m.setAttribute('name','description');
+      m.setAttribute('content','Personal portfolio of Alex Doe: projects, skills, and contact.');
+      document.head.appendChild(m);
+    }
+    // Optional canonical if FRONTEND_URL present
+    if (site) {
+      const canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link');
+      canonical.setAttribute('rel','canonical');
+      try {
+        const url = site.startsWith('http') ? site : `https://${site}`;
+        canonical.setAttribute('href', url);
+        if (!document.head.contains(canonical)) document.head.appendChild(canonical);
+      } catch { /* ignore */ }
+    }
+  }, []);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <a href="#home" className="visually-hidden">Skip to content</a>
+      <Navbar />
+      <main id="main" tabIndex={-1}>
+        <Hero />
+        <Skills />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 }

@@ -3,8 +3,8 @@ import App from '../App';
 
 test('renders navbar links', () => {
   render(<App />);
-  expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: /skills/i })).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: /projects/i })).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: /contact/i })).toBeInTheDocument();
+  expect(screen.getByRole('menuitem', { name: /home/i })).toBeInTheDocument();
+  expect(screen.getByRole('menuitem', { name: /skills/i })).toBeInTheDocument();
+  expect(screen.getByRole('menuitem', { name: /projects/i })).toBeInTheDocument();
+  expect(screen.getByRole('menuitem', { name: /contact/i })).toBeInTheDocument();
 });

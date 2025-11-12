@@ -18,3 +18,10 @@ if (typeof window !== 'undefined' && !window.IntersectionObserver) {
   // eslint-disable-next-line no-undef
   global.IntersectionObserver = IO;
 }
+
+// Safe mock for scrollIntoView to avoid jsdom errors in tests
+// Only define if the environment does not already provide it
+if (typeof HTMLElement !== 'undefined' && !HTMLElement.prototype.scrollIntoView) {
+  // eslint-disable-next-line no-undef
+  HTMLElement.prototype.scrollIntoView = jest.fn();
+}

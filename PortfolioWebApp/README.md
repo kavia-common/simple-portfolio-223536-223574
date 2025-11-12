@@ -31,9 +31,9 @@ Open http://localhost:3000 after starting.
 
 ## Environment
 
-No new environment variables are introduced. If present, the following are optionally used:
-- REACT_APP_FRONTEND_URL (for canonical/title context)
-- REACT_APP_API_BASE (fallback for canonical)
+No new environment variables are required. If present, the following are optionally used at runtime for SEO:
+- REACT_APP_FRONTEND_URL (recommended) — Base site URL used to compute the canonical URL and JSON-LD schema
+- REACT_APP_API_BASE (fallback) — Used only if REACT_APP_FRONTEND_URL is absent
 
 Never include secrets in the client.
 

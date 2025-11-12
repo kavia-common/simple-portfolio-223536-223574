@@ -7,6 +7,7 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { setSeoDefaults } from './utils/seo';
 
 /**
  * PUBLIC_INTERFACE
@@ -14,7 +15,6 @@ import Footer from './components/Footer';
  */
 function App() {
   useEffect(() => {
-    const site = process.env.REACT_APP_FRONTEND_URL || process.env.REACT_APP_API_BASE || '';
     document.title = `Alex Doe • Portfolio`;
     const metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
@@ -23,16 +23,8 @@ function App() {
       m.setAttribute('content','Personal portfolio of Alex Doe: projects, skills, and contact.');
       document.head.appendChild(m);
     }
-    // Optional canonical if FRONTEND_URL present
-    if (site) {
-      const canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link');
-      canonical.setAttribute('rel','canonical');
-      try {
-        const url = site.startsWith('http') ? site : `https://${site}`;
-        canonical.setAttribute('href', url);
-        if (!document.head.contains(canonical)) document.head.appendChild(canonical);
-      } catch { /* ignore */ }
-    }
+    // Apply canonical and JSON-LD schema at runtime
+    setSeoDefaults();
   }, []);
 
   return (
